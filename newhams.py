@@ -36,6 +36,7 @@ newCall_list = []
 county_list = []
 final_list = []
 desired_dates = []
+upgrade_list = []
 index = 1
 index2 = 0
 email_message = ''
@@ -80,7 +81,7 @@ with open(f'{zip_location}/HS.dat', 'r') as hs_data:
         if row[5] == 'SYSGRT' and row[4] in desired_dates:
             newCall_list.append(row)
         else:
-            continue
+            continue        
 #Get desired rows from "EN" file
 with open(f'{zip_location}/EN.dat', 'r') as en_data:
     en_reader = csv.reader(en_data, delimiter='|')
@@ -89,10 +90,19 @@ with open(f'{zip_location}/EN.dat', 'r') as en_data:
             county_list.append(row)
         else:
             continue
+#Get data from AM file to see if they are a ham that upgraded and received a new systematic callsign
+with open(f'{zip_location}/AM.dat', 'r') as am_data:
+    am_reader = csv.reader(am_data, delimiter='|')
+    for row in am_reader:
+        for i in newCall_list:
+            if row[4] == i[3]:
+                upgrade_list.append(row)
+            else:
+                continue
 # Compare built lists and compile new list of ones that match
 for x in county_list:
-    for y in newCall_list:
-        if x[4] == y[3]:
+    for y in upgrade_list:
+        if x[4] == y[4] and y[15] == '':
             final_list.append(x)
         else:
             continue
