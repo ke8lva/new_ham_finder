@@ -66,14 +66,17 @@ def email(address):
         server.login(sender_email, password)
         server.sendmail(sender_email, address, msg.as_string())
 #Build desired date range
-for d in range(7):
-    i = today - timedelta(days = index2)
-    desired_dates.append(i.strftime("%m/%d/%Y"))
-    index2 += 1
-# Get desired rows from "HS" file
-with open(f'{zip_location}/HS.dat', 'r') as hs_data:
+with open(f'{zip_location}/HS.dat', 'r') as hs_data: 
+    temp_list = []
     hs_reader = csv.reader(hs_data, delimiter='|')
-    for row in hs_reader:
+    for i in hs_reader:
+        temp_list.append(i)
+    for d in range(7):
+        i = datetime.strptime(temp_list[-1][4], '%m/%d/%Y') - timedelta(days = index2)
+        desired_dates.append(i.strftime("%m/%d/%Y")) 
+        index2 += 1
+#Get desired date range data from rows in HS file 
+    for row in temp_list:
         if row[5] == 'SYSGRT' and row[4] in desired_dates:
             newCall_list.append(row)
         else:
