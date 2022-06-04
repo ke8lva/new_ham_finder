@@ -19,7 +19,7 @@ zip_location = 'path/to/your/file/location'
 #Desired zip code areas to search for new hams.
 zip_list = ['44691', '44667', '44662', '44230', '44606', '44270', '44287',
  '44618', '44627', '44624', '44676', '44217', '44677', '44666', '44645',
-  '44214', '44276', '44636', '44659']
+ '44214', '44276', '44636', '44659']
 #smtp email server setting
 port = 587
 smtp_server = 'smtp.mail.server'
@@ -90,12 +90,13 @@ with open(f'{zip_location}/EN.dat', 'r') as en_data:
             county_list.append(row)
         else:
             continue
-#Get data from AM file to see if they are a ham that upgraded and received a new systematic callsign
+#Get data from AM file to see if they are a ham that upgraded and recieved a 
+# new systematic callsign and that it is not a club callsign.
 with open(f'{zip_location}/AM.dat', 'r') as am_data:
     am_reader = csv.reader(am_data, delimiter='|')
     for row in am_reader:
         for i in newCall_list:
-            if row[4] == i[3]:
+            if row[4] == i[3] and row[17] == '':
                 upgrade_list.append(row)
             else:
                 continue
