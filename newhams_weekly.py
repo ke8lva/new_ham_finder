@@ -14,8 +14,6 @@ found_email = ['youremail@email.com']
 none_found_email = ['anotheremail@email.com']
 #email you want reciever of these emails to reply to if they reply.
 reply_address = 'email@email.com'
-#location where you want FCC file to be saved. If your path starts C:\Users use / not \
-zip_location = 'path/to/your/file/location'
 #Desired zip code areas to search for new hams.
 zip_list = ['44691', '44667', '44662', '44230', '44606', '44270', '44287',
  '44618', '44627', '44624', '44676', '44217', '44677', '44666', '44645',
@@ -47,11 +45,11 @@ url = "https://data.fcc.gov/download/pub/uls/complete/l_amat.zip"
 filename = url.split('/')[-1]
 response = requests.get(url)
 zipfile = zipfile.ZipFile(BytesIO(response.content))
-zipfile.extractall(zip_location)
+zipfile.extractall()
 response.close()
 #Send email function
 def email(address):
-    message = f'Here are the new hams in Wayne County for {desired_dates[-1]} - {desired_dates[0]}.\n\n{email_message}'
+    message = f'Here are the new hams in your area for {desired_dates[-1]} - {desired_dates[0]}.\n\n{email_message}'
     msg = MIMEText(message)
     msg['Subject'] = f'New Hams {desired_dates[-1]} - {desired_dates[0]}'
     msg['From'] = sender_email
@@ -67,7 +65,7 @@ def email(address):
         server.login(sender_email, password)
         server.sendmail(sender_email, address, msg.as_string())
 #Build desired date range
-with open(f'{zip_location}/HS.dat', 'r') as hs_data: 
+with open('HS.dat', 'r') as hs_data: 
     temp_list = []
     hs_reader = csv.reader(hs_data, delimiter='|')
     for i in hs_reader:
@@ -83,7 +81,7 @@ with open(f'{zip_location}/HS.dat', 'r') as hs_data:
         else:
             continue        
 #Get desired rows from "EN" file
-with open(f'{zip_location}/EN.dat', 'r') as en_data:
+with open('EN.dat', 'r') as en_data:
     en_reader = csv.reader(en_data, delimiter='|')
     for row in en_reader:
         if row[18][0:5] in zip_list:
@@ -92,7 +90,7 @@ with open(f'{zip_location}/EN.dat', 'r') as en_data:
             continue
 #Get data from AM file to see if they are a ham that upgraded and recieved a 
 # new systematic callsign and that it is not a club callsign.
-with open(f'{zip_location}/AM.dat', 'r') as am_data:
+with open('AM.dat', 'r') as am_data:
     am_reader = csv.reader(am_data, delimiter='|')
     for row in am_reader:
         for i in newCall_list:
@@ -125,6 +123,7 @@ if len(final_list) > 0:
     exit()
 else:
     email_message += 'There are no new hams for this date range.'
+#if you dont want to receive an email if none where found comment out the next line
     email(none_found_email)
     print('No new hams')
     exit()
