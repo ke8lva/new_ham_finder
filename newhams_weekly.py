@@ -24,7 +24,7 @@ zip_list = ['44691', '44667', '44662', '44230', '44606', '44270', '44287',
 port = 587
 smtp_server = 'smtp.mail.server'
 sender_email = 'smtp@domain.com'
-password = ''
+password = 'yourpassword'
 
 
 """
