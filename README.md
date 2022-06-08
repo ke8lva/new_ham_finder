@@ -27,7 +27,7 @@ same setup. For this I will use newhams_daily.py
 Use an editor to edit the file.\
 **sudo nano /etc/new_ham_finder/newhams_daily.py**
 
-You will need to change your information in the variables between lines 11-25.  
+You will need to change your information in the variables towards the top.  
 
 found_email and none_found_email are the addresses you want the program to send the final
 results to.  They can be the same or different addresses.  To send to multiple email
@@ -62,8 +62,8 @@ use your app password in place of you email password for this script.*
 You can find instruction to receive an app password below.  
 __<https://support.google.com/mail/answer/185833?hl=en>__
 
-If you do not want to receive an email if no knew hams where found you can simply comment
-out line 141, like below.  
+If you do not want to receive an email if no new hams where found you can simply comment
+this line out towards the bottom of the script, like below.  
 __#     email(none_found_email)__
 
 Save your changes  
@@ -89,11 +89,6 @@ Save and exit
 **ctrl + o**  
 **enter**  
 **ctrl + x**
-
-
-
-
-
 
     
 ## License
