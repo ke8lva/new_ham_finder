@@ -22,7 +22,7 @@ Download the repository
 **sudo git clone https://github.com/ke8lva/new_ham_finder.git**
 
 You will need to choose if you want to use the daily or weekly version.  They require the
-same setup. For this I will use newhams_daily.py
+same setup. For this I will use newhams_daily.py because it runs much quicker with smaller downloads.
 
 Use an editor to edit the file.\
 **sudo nano /etc/new_ham_finder/newhams_daily.py**
