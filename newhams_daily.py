@@ -33,12 +33,12 @@ No changes need to be made below here.
 newCall_list = []
 county_list = []
 final_list = []
-desired_dates = []
 upgrade_list = []
 index = 1
-index2 = 0
 email_message = ''
 today = datetime.now()
+yesterday = datetime.today() - timedelta(days=1)
+desired_dates = yesterday.strftime('%m/%d/%Y')
 day = ''
 pid = os.getpid()
 # assign day of week to day variable for getting correct download
@@ -67,9 +67,9 @@ zipfile.extractall()
 response.close()
 #Send email function
 def email(address):
-    message = f'Here are the new hams in your area for {desired_dates[-1]} - {desired_dates[0]}.\n\n{email_message}'
+    message = f'Here are the new hams in your area for {desired_dates}.\n\n{email_message}'
     msg = MIMEText(message)
-    msg['Subject'] = f'New Hams {desired_dates[-1]} - {desired_dates[0]}'
+    msg['Subject'] = f'New Hams {desired_dates}'
     msg['From'] = sender_email
     msg['To'] = ', '.join(address)
     msg['Reply-To'] = reply_address
@@ -88,13 +88,9 @@ with open('HS.dat', 'r') as hs_data:
     hs_reader = csv.reader(hs_data, delimiter='|')
     for i in hs_reader:
         temp_list.append(i)
-    for d in range(7):
-        i = datetime.strptime(temp_list[-1][4], '%m/%d/%Y') - timedelta(days = index2)
-        desired_dates.append(i.strftime("%m/%d/%Y")) 
-        index2 += 1
 #Get desired date range data from rows in HS file 
     for row in temp_list:
-        if row[5] == 'SYSGRT' and row[4] in desired_dates:
+        if row[5] == 'SYSGRT' and row[4] == desired_dates:
             newCall_list.append(row)
         else:
             continue        
