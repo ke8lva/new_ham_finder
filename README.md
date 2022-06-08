@@ -82,9 +82,11 @@ Next you will need to schedule the newhams_daily.py to run when you want.  Open 
 to set the schedule.  
 __crontab -e__  
 
-I will schedule this to run every day at 6:00 am with the below line. for newhams_weekly you would  
-schedule it to run once per week.  
+I will schedule this to run every day at 6:00 am with the below line. for newhams_weekly you would schedule it to run once per week.  
 **0 6 * * * /usr/bin/python3 /etc/new_ham_finder/newhams_daily.py**  
+
+More information on cron can be found below.  
+**https://en.wikipedia.org/wiki/Cron**  
 
 Save and exit  
 **ctrl + o**  
