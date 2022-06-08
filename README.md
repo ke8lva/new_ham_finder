@@ -83,7 +83,7 @@ to set the schedule.
 __crontab -e__  
 
 I will schedule this to run every day at 6:00 am with the below line. for newhams_weekly you would  
-schedule it to run once per week.
+schedule it to run once per week.  
 **0 6 * * * /usr/bin/python3 /etc/new_ham_finder/newhams_daily.py**  
 
 Save and exit  
