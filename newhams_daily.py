@@ -23,7 +23,7 @@ port = 587
 smtp_server = 'smtp.mail.server'
 sender_email = 'youremail@email.com'
 password = 'yourpassword'
-
+working_directory = '/path/to/working/directory'
 
 """
 No changes need to be made below here.
@@ -63,7 +63,7 @@ url = f'https://data.fcc.gov/download/pub/uls/daily/l_am_{day}.zip'
 filename = url.split('/')[-1]
 response = requests.get(url)
 zipfile = zipfile.ZipFile(BytesIO(response.content))
-zipfile.extractall()
+zipfile.extractall(working_directory)
 response.close()
 #Send email function
 def email(address):
@@ -83,7 +83,7 @@ def email(address):
         server.login(sender_email, password)
         server.sendmail(sender_email, address, msg.as_string())
 #Build desired date range
-with open('HS.dat', 'r') as hs_data: 
+with open(f'{working_directory}/HS.dat', 'r') as hs_data: 
     temp_list = []
     hs_reader = csv.reader(hs_data, delimiter='|')
     for i in hs_reader:
@@ -95,7 +95,7 @@ with open('HS.dat', 'r') as hs_data:
         else:
             continue        
 #Get desired rows from "EN" file
-with open('EN.dat', 'r') as en_data:
+with open(f'{working_directory}/EN.dat', 'r') as en_data:
     en_reader = csv.reader(en_data, delimiter='|')
     for row in en_reader:
         if row[18][0:5] in zip_list:
@@ -104,7 +104,7 @@ with open('EN.dat', 'r') as en_data:
             continue
 #Get data from AM file to see if they are a ham that upgraded and recieved a 
 # new systematic callsign and that it is not a club callsign.
-with open('AM.dat', 'r') as am_data:
+with open(f'{working_directory}/AM.dat', 'r') as am_data:
     am_reader = csv.reader(am_data, delimiter='|')
     for row in am_reader:
         for i in newCall_list:
