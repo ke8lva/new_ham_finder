@@ -55,6 +55,9 @@ __smtp_server = 'smtp.gmail.com'__
 __sender_email = ``'yourgmail@gmail.com'``__  
 __password = 'yourpassword'__
 
+Change the working directory variable to the path to the working directory for the project.  For this example mine is set to
+__working_directory = '/etc/new_ham_finder'
+
 *Starting June 2022 gmail no longer supports "less secure apps" for smtp.  If you are using
 gmail, you will have to obtain an app password from gmail.  Once you get this, you will
 use your app password in place of you email password for this script.*
@@ -82,8 +85,8 @@ Next you will need to schedule the newhams_daily.py to run when you want.  Open 
 to set the schedule.  
 __crontab -e__  
 
-I will schedule this to run every day at 6:00 am with the below line. for newhams_weekly you would schedule it to run once per week.  
-**0 6 * * * /usr/bin/python3 /etc/new_ham_finder/newhams_daily.py**  
+I will schedule this to run every day at 8:30 am with the below line. for newhams_weekly you would schedule it to run once per week. The daily fcc uploads take place at 8:00am EST so I set it to run at 8:30 incase there is a delay. 
+**30 8 * * * /usr/bin/python3 /etc/new_ham_finder/newhams_daily.py**  
 
 More information on cron can be found below.  
 **https://en.wikipedia.org/wiki/Cron**  
