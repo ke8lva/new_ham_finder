@@ -85,7 +85,7 @@ Next you will need to schedule the newhams_daily.py to run when you want.  Open 
 to set the schedule.  
 __crontab -e__  
 
-I will schedule this to run every day at 8:30 am with the below line. for newhams_weekly you would schedule it to run once per week. The daily fcc uploads take place at 8:00am EST so I set it to run at 8:30 incase there is a delay. 
+I will schedule this to run every day at 8:30 am with the below line. for newhams_weekly you would schedule it to run once per week. The daily fcc uploads take place at 8:00am EST so I set it to run at 8:30am by entering the following line.  
 **30 8 * * * /usr/bin/python3 /etc/new_ham_finder/newhams_daily.py**  
 
 More information on cron can be found below.  
