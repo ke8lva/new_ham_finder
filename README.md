@@ -56,7 +56,7 @@ __sender_email = ``'yourgmail@gmail.com'``__
 __password = 'yourpassword'__
 
 Change the working directory variable to the path to the working directory for the project.  For this example mine is set to
-__working_directory = '/etc/new_ham_finder'
+__working_directory = '/etc/new_ham_finder'__
 
 *Starting June 2022 gmail no longer supports "less secure apps" for smtp.  If you are using
 gmail, you will have to obtain an app password from gmail.  Once you get this, you will
